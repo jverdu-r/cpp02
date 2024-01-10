@@ -17,9 +17,6 @@
 
 class Fixed
 {
-    private:
-        int _pf;
-        static const int _nbFrac = 8;
     public:
         Fixed(void);
         Fixed(const int i);
@@ -31,6 +28,10 @@ class Fixed
         void setRawBits(const int raw);
         float toFloat(void) const;
         int toInt(void) const;
+    private:
+        int _pf;
+        static const int _nbFrac = 8;
+    
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed);

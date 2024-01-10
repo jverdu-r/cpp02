@@ -16,16 +16,15 @@
 
 class Fixed
 {
-    private:
-        int _pf;
-        static const int _nbFrac = 8;
-    public:
+        public:
         Fixed(void);
         Fixed(const Fixed &fixed);
         ~Fixed(void);
         Fixed &operator=(const Fixed &fixed);
-
         int getRawBits(void) const;
         void setRawBits(const int raw);
+    private:
+        int _pf;
+        static const int _nbFrac = 8;
 };
 #endif
