@@ -23,19 +23,19 @@ Point::Point(Point const &point)
 
 Point &Point::operator=(Point const &point)
 {
-    const_cast<Fixed&>(x) = point.getx();
-    const_cast<Fixed&>(y) = point.gety();
+    const_cast<Fixed&>(x) = point.getX();
+    const_cast<Fixed&>(y) = point.getY();
     return (*this);
 }
 
 Point::~Point(void){return;}
 
-Fixed Point::getx(void) const
+Fixed Point::getX(void) const
 {
     return ((Fixed)x);
 }
 
-Fixed Point::gety(void) const
+Fixed Point::getY(void) const
 {
     return ((Fixed)y);
 }

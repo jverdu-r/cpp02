@@ -18,13 +18,13 @@ int main(void)
     Point const b (10, 30);
     Point const c (20, 0);
     Point const in (10, 15);
-    Point const out (150, 300);
+    Point const out (30, 15);
 
-    std::cout << "a: " << a.getx() << ", " << a.gety();
-    std::cout << " b: " << b.getx() << ", " << b.gety();
-    std::cout << " c: " << c.getx() << ", " << c.gety();
-    std::cout << " in: " << in.getx() << ", " << in.gety();
-    std::cout << " out: " << out.getx() << ", " << out.gety() << std::endl;
+    std::cout << "a: " << a.getX() << ", " << a.getY();
+    std::cout << " b: " << b.getX() << ", " << b.getY();
+    std::cout << " c: " << c.getX() << ", " << c.getY();
+    std::cout << " in: " << in.getX() << ", " << in.getY();
+    std::cout << " out: " << out.getX() << ", " << out.getY() << std::endl;
 
     std::cout << "in: " << ((bsp(a, b, c, in) == true) ? "is inside" : "is not inside") << std::endl;
     std::cout << "out: " <<((bsp(a, b, c, out) == true) ? "is inside" : "is not inside") << std::endl;

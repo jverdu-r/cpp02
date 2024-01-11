@@ -12,19 +12,14 @@
 
 #include "../inc/main.hpp"
 
-Fixed area(Point const a, Point const b, Point const c)
+bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
-    Fixed area = a.getx() * (b.gety() - c.gety()) + b.getx() * (c.gety() - a.gety()) + c.getx() * (a.gety() - b.gety());
-    if (area < 0)
-        return (area * Fixed(-1.0f));
-    return (area / Fixed(2.0f));
-}
-
-bool bsp(Point const  a, Point const  b, Point const  c, Point const  point)
-{
-    Fixed t_area = area(a, b, c);
-    Fixed area_1 = area(point, b, c);
-    Fixed area_2 = area(a, point, c);
-    Fixed area_3 = area(a, b, point);
-    return (t_area == (area_1 + area_2 + area_3));
+	float d1 = ((point.getX().toFloat() - b.getX().toFloat()) * (a.getY().toFloat() - b.getY().toFloat()) - (a.getX().toFloat() - b.getX().toFloat()) * (point.getY().toFloat() - b.getY().toFloat()));
+	float d2 = ((point.getX().toFloat() - c.getX().toFloat()) * (b.getY().toFloat() - c.getY().toFloat()) - (b.getX().toFloat() - c.getX().toFloat()) * (point.getY().toFloat() - c.getY().toFloat()));
+	float d3 = ((point.getX().toFloat() - a.getX().toFloat()) * (c.getY().toFloat() - a.getY().toFloat()) - (c.getX().toFloat() - a.getX().toFloat()) * (point.getY().toFloat() - a.getY().toFloat()));
+	
+	bool has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+	bool has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+	
+	return (!(has_neg && has_pos));
 }
