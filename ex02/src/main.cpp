@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jverdu-r <jverdu-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:06:14 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/01/10 18:06:16 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:24:22 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(void)
 {
     Fixed a;
-    Fixed const b(Fixed(5.05f) * Fixed(2));
+    Fixed const b = (Fixed(5.05f) * Fixed(2));
 
     std::cout << a << std::endl;
     std::cout << ++a << std::endl;

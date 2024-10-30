@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jverdu-r <jverdu-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:05:27 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/01/09 19:05:29 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:50:42 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Fixed::Fixed(const float f)
 {
     std::cout << "Float constructor called." << std::endl;
     this->_pf = roundf(f *(1 << this->_nbFrac));
+    std::cout << this->_nbFrac << std::endl;
 }
 
 Fixed::Fixed(const Fixed &fixed)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jverdu-r <jverdu-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:05:35 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/01/09 19:05:37 by jverdu-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:53:33 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int main(void)
     std::cout << "c is: " << c << std::endl;
     std::cout << "d is: " << d << std::endl;
 
-    std::cout << "a is: " << a << " as integer." << std::endl;
-    std::cout << "a is: " << b << " as integer." << std::endl;
-    std::cout << "a is: " << c << " as integer." << std::endl;
-    std::cout << "a is: " << d << " as integer." << std::endl;
+    std::cout << "a is: " << a.toInt() << " as integer." << std::endl;
+    std::cout << "a is: " << b.toInt() << " as integer." << std::endl;
+    std::cout << "a is: " << c.toInt() << " as integer." << std::endl;
+    std::cout << "a is: " << d.toInt() << " as integer." << std::endl;
    
     return (0);
 }

@@ -3,173 +3,168 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jverdu-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jverdu-r <jverdu-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 19:14:38 by jverdu-r          #+#    #+#             */
-/*   Updated: 2024/01/10 19:15:02 by jverdu-r         ###   ########.fr       */
+/*   Created: 2024/01/10 18:06:07 by jverdu-r          #+#    #+#             */
+/*   Updated: 2024/10/30 12:34:43 by jverdu-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-                                                
+
 #include "../inc/Fixed.hpp"
 
-Fixed::Fixed(void)
+Fixed::Fixed(void) : _pf(0)
 {
-    this->_pf = 0;
 }
 
-Fixed::Fixed(const int i)
-{
-    this->_pf = i << this->_nbFrac;
+Fixed::Fixed(const int value)
+{	
+	this->_pf = value << this->_nbFrac;
 }
 
-Fixed::Fixed(const float f)
+Fixed::Fixed(const float value)
 {
-    this->_pf = roundf(f *(1 << this->_nbFrac));
+	this->_pf = roundf(value * (1 << this->_nbFrac));
 }
 
-Fixed::Fixed(const Fixed &fixed)
+Fixed::~Fixed() 
 {
-    *this = fixed;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed::Fixed(Fixed const &other) 
 {
-    if (this != &fixed)
-        this->_pf = fixed.getRawBits();
-    return (*this);
+	*this = other;
 }
 
-bool Fixed::operator>(const Fixed &fixed)
+
+Fixed&	Fixed::operator=(const Fixed &rhs) 
 {
-    return (this->toFloat() > fixed.toFloat());
+	if (this != &rhs)
+		this->_pf = rhs.getRawBits();
+	return *this;
 }
 
-bool Fixed::operator<(const Fixed &fixed)
+Fixed	Fixed::operator+(const Fixed &rhs) const
 {
-    return (this->toFloat() < fixed.toFloat());
+	Fixed	result(this->toFloat() + rhs.toFloat());
+	return result;
 }
 
-bool Fixed::operator>=(const Fixed &fixed)
+Fixed	Fixed::operator-(const Fixed &rhs) const
 {
-    return (this->toFloat() >= fixed.toFloat());
+	Fixed	result(this->toFloat() - rhs.toFloat());
+	return result;
 }
 
-bool Fixed::operator<=(const Fixed &fixed)
+Fixed	Fixed::operator*(const Fixed &rhs) const
 {
-    return (this->toFloat() <= fixed.toFloat());
+	Fixed	result(this->toFloat() * rhs.toFloat());
+	return result;
 }
 
-bool Fixed::operator==(const Fixed &fixed)
+Fixed	Fixed::operator/(const Fixed &rhs) const
 {
-    return (this->toFloat() == fixed.toFloat());
+	Fixed	result(this->toFloat() / rhs.toFloat());
+	return result;
 }
 
-bool Fixed::operator!=(const Fixed &fixed)
+bool	Fixed::operator>(const Fixed &rhs) const
 {
-    return (this->toFloat() != fixed.toFloat());
+	return this->toFloat() > rhs.toFloat();
 }
 
-Fixed Fixed::operator*(const Fixed &fixed)
+bool	Fixed::operator<(const Fixed &rhs) const
 {
-    return ((this->_pf * fixed._pf) >> _nbFrac);
+	return this->toFloat() < rhs.toFloat();
 }
 
-Fixed Fixed::operator/(const Fixed &fixed)
+bool	Fixed::operator>=(const Fixed &rhs) const
 {
-    return ((this->_pf << _nbFrac) / fixed._pf);
+	return this->toFloat() >= rhs.toFloat();
 }
 
-Fixed Fixed::operator+(const Fixed &fixed)
+bool	Fixed::operator<=(const Fixed &rhs) const
 {
-    return (this->_pf + fixed._pf);
+	return this->toFloat() <= rhs.toFloat();
 }
 
-Fixed Fixed::operator-(const Fixed &fixed)
+bool	Fixed::operator==(const Fixed &rhs) const
 {
-    return (this->_pf - fixed._pf);
+	return this->toFloat() == rhs.toFloat();
 }
 
-Fixed Fixed::operator++(int)
+bool	Fixed::operator!=(const Fixed &rhs) const
 {
-    Fixed ret(*this);
-    ++(*this);
-    return (ret);
+	return this->toFloat() != rhs.toFloat();
 }
 
-Fixed &Fixed::operator++(void)
+Fixed	Fixed::operator++(int value)
 {
-    _pf += 1;
-    return (*this);
+	Fixed tmp(*this);
+
+	if (!value)
+		value = 1;
+	this->setRawBits(this->getRawBits() + value);
+	return tmp;
 }
 
-Fixed Fixed::operator--(int)
+Fixed	Fixed::operator++(void)
 {
-    Fixed ret(*this);
-    --(*this);
-    return (ret);
+	this->setRawBits(this->getRawBits() + 1);
+	return *this;
 }
 
-Fixed &Fixed::operator--(void)
+Fixed	Fixed::operator--(int value)
 {
-    _pf -= 1;
-    return (*this);
+	Fixed tmp(*this);
+
+	if (!value)
+		value = 1;
+	this->setRawBits(this->getRawBits() - value);
+	return tmp;
 }
 
-Fixed::~Fixed(void)
+Fixed	Fixed::operator--(void)
 {
-    return;
+	this->setRawBits(this->getRawBits() - 1);
+	return *this;
 }
 
-int Fixed::getRawBits(void) const
+const Fixed	&Fixed::min(Fixed const &a, Fixed const &b)
 {
-    return (this->_pf);
+	if (a < b)
+		return a;
+	return b;
 }
 
-void Fixed::setRawBits(const int raw)
+const Fixed	&Fixed::max(Fixed const &a, Fixed const &b)
 {
-    this->_pf = raw;
+	if (a > b)
+		return a;
+	return b;
 }
 
-float Fixed::toFloat(void) const
+int Fixed::getRawBits(void) const 
 {
-    return (roundf((float)this->_pf) / (1 << this->_nbFrac));
+	return this->_pf;
+} 
+
+void Fixed::setRawBits(int const raw) 
+{
+	this->_pf = raw;
 }
 
-int Fixed::toInt(void) const
+float Fixed::toFloat( void ) const
 {
-    return (this->_pf >> this->_nbFrac);
+	return (float)this->_pf / (float)(1 << this->_nbFrac);
 }
 
-Fixed &Fixed::min(Fixed &i, Fixed &j)
+int Fixed::toInt( void ) const
 {
-    if (i.toFloat() > j.toFloat())
-        return (j);
-    return (i);
+	return this->_pf >> this->_nbFrac;
 }
 
-Fixed &Fixed::min(const Fixed &i, const Fixed &j)
+std::ostream	&operator<<(std::ostream &out, const Fixed &fixed)
 {
-    if (i.toFloat() > j.toFloat())
-        return ((Fixed&)j);
-    return ((Fixed&)i);
-}
-
-Fixed &Fixed::max(Fixed &i, Fixed &j)
-{
-    if (i.toFloat() < j.toFloat())
-        return (j);
-    return (i);
-}
-
-Fixed &Fixed::max(const Fixed &i, const Fixed &j)
-{
-    if (i.toFloat() < j.toFloat())
-        return ((Fixed&)j);
-    return ((Fixed&)i);  
-}
-
-std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
-{
-    out << fixed.toFloat();
-    return (out);
+	out << fixed.toFloat();
+	return out;
 }
